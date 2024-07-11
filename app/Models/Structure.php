@@ -18,8 +18,8 @@ class Structure extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
+        'nom',
+        'mail',
         'phone',
         'typeStructure'
     ];

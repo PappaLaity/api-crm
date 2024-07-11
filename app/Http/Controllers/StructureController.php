@@ -26,11 +26,14 @@ class StructureController extends Controller
     public function store(Request $request)
     {
         $validateData = $request->validate([
-            // Validation Rules
+            "nom" => 'required|string',
+            "mail" => 'required|email',
+            "phone" => "required|string",
+            "typeStructure" => "required|string"
         ]);
 
         $structure = Structure::create($validateData);
-        return $this->successResponse(StructureResource::collection($structure), "Struture Successfully Created");
+        return $this->successResponse(new StructureResource($structure), "Struture Successfully Created", 201);
         //
     }
 
@@ -49,7 +52,12 @@ class StructureController extends Controller
     public function update(Request $request, Structure $structure)
     {
         // Validate Data
-        $validatedData = $request->validated();
+        $validatedData = $request->validate([
+                "nom" => 'sometimes|string',
+                "mail" => 'sometimes|email',
+                "phone" => "sometimes|string"
+            ]
+        );
 
         // Update Data
         $structure->update($validatedData);
