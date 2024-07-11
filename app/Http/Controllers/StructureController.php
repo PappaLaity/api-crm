@@ -2,17 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\StructureResource;
 use App\Models\Structure;
+use App\Traits\ResponseTrait;
 use Illuminate\Http\Request;
 
 class StructureController extends Controller
 {
+    use ResponseTrait;
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $structures = Structure::all();
+        return $this->successResponse(StructureResource::collection($structures), "Struture List Successfully recept");
     }
 
     /**
@@ -28,7 +33,8 @@ class StructureController extends Controller
      */
     public function show(Structure $structure)
     {
-        //
+        return $this->successResponse(new StructureResource($structure), 'Structure Details');
+
     }
 
     /**
@@ -36,7 +42,15 @@ class StructureController extends Controller
      */
     public function update(Request $request, Structure $structure)
     {
-        //
+        // Validate Data
+        $validatedData = $request->validated();
+
+        // Update Data
+        $structure->update($validatedData);
+
+        // Return Json Data and Successfully Update Message
+        return $this->successResponse(new StructureResource($structure), 'Structure Successfully Updated');
+
     }
 
     /**
@@ -44,6 +58,8 @@ class StructureController extends Controller
      */
     public function destroy(Structure $structure)
     {
-        //
+        $structure->delete();
+        return $this->successResponse(null, 'Structure successfully deleted');
+
     }
 }
