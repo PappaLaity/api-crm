@@ -2,9 +2,13 @@
 
 namespace Database\Seeders;
 
+use App\Enums\StructureType;
+use App\Enums\UserRole;
+use App\Models\Structure;
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+
+// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,9 +19,19 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        Structure::factory()->create([
+            "typeStructure" => StructureType::ADMIN->value,
         ]);
+        Structure::factory()->create([
+            "typeStructure" => StructureType::Provider->value,
+        ]);
+
+        User::factory()->create([
+            'name' => 'User Admin',
+            'email' => 'test@example.com',
+            'role' => UserRole::ADMIN->value,
+            "structure_id" => Structure::where('typeStructure', StructureType::ADMIN->value)->get()->random()->id
+        ]);
+
     }
 }
