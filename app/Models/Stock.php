@@ -8,19 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 
-class Customer extends Model
+class Stock extends Model
 {
     use HasFactory, Notifiable, SoftDeletes, HasUuids;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
-        'firstname',
-        'lastname',
-        'phone',
+        'quantity',
+        'product_company_id',
     ];
 
+    public function products()
+    {
+        return $this->hasOne(Product::class, "company_id", "product_company_id");
+    }
 }

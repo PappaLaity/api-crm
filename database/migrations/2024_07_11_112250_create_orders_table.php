@@ -10,11 +10,13 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('customers', function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('firstname');
-            $table->string('lastname');
-            $table->string('phone');
+            $table->string('number')->unique();
+            $table->decimal('amount', 10, 2);
+            $table->enum("status", ['created', "validated"])->default("created");
+            $table->boolean('paid')->default(false);
+            $table->foreignUuid('user_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -25,6 +27,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('customers');
+        Schema::dropIfExists('orders');
     }
 };

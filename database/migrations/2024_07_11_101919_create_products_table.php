@@ -4,16 +4,23 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
     public function up(): void
     {
         Schema::create('products', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
+            $table->string('ref_provider');// REF PROVIDER
+            $table->foreignUuid('provider_id')->constrained('structures')->onDelete('cascade');// ID PROVIDER
+            $table->string('ref_company')->nullable();// REF COMPANY
+            $table->foreignUuid('company_id')->nullable()->constrained('structures')->onDelete('cascade');// ID COMPANY
+            $table->string('designation');// DESIGNATION
+            $table->string('barcode');// BarCode
+            $table->decimal('price', 10, 2);;// BarCode
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

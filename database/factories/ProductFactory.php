@@ -17,7 +17,13 @@ class ProductFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            "barcode" => fake()->unique()->ean13(),
+            "designation" => fake()->text(50),
+            "price" => 1000,
+            "ref_provider" => "REF_PROVIDER_" . fake()->text(5),
+            "ref_company" => "REF_COMPANY_" . fake()->text(5),
+            "provider_id" => 1,
+            "company_id" => 2,
         ];
     }
 }

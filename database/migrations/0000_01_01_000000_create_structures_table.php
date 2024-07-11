@@ -13,7 +13,7 @@ return new class extends Migration {
         Schema::create('structures', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('nom');
-            $table->string('telephone')->unique();
+            $table->string('phone')->unique();
             $table->string('mail')->unique();
             $table->enum('typeStructure', ["Batimat", "Provider"]);
             $table->timestamps();

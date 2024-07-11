@@ -2,12 +2,13 @@
 
 namespace Database\Factories;
 
+use App\Enums\OrderStatus;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Customer>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Order>
  */
-class CustomerFactory extends Factory
+class OrderFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,9 +18,9 @@ class CustomerFactory extends Factory
     public function definition(): array
     {
         return [
-            "firstname" => fake()->firstName(),
-            "lastname" => fake()->lastName(),
-            "phone" => fake()->unique()->phoneNumber()
+            "number" => fake()->unique()->ean8(),
+            "amount" => 100000,
+            "status" => OrderStatus::Created->value
         ];
     }
 }

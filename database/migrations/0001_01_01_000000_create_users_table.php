@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->uuid('id')->primary();
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('telephone')->unique();
+            $table->string('phone')->unique();
             $table->enum('role', ['admin', 'manager', 'provider']);
             $table->foreignUuid('structure_id')->constrained('structures')->onDelete('cascade');
             $table->timestamp('email_verified_at')->nullable();

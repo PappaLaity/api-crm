@@ -19,7 +19,7 @@ class StructureFactory extends Factory
         return [
             "nom" => fake()->unique()->company(),
             "mail" => fake()->unique()->companyEmail(),
-            "telephone" => fake()->unique()->phoneNumber(),
+            "phone" => fake()->unique()->phoneNumber(),
             "typeStructure" => "Batimat",
         ];
     }

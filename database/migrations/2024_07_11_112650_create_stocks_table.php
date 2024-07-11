@@ -10,11 +10,10 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('customers', function (Blueprint $table) {
+        Schema::create('stocks', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('firstname');
-            $table->string('lastname');
-            $table->string('phone');
+            $table->foreignUuid('product_company_id')->constrained('products', 'company_id')->onDelete('cascade');
+            $table->integer("quantity")->default(0);
             $table->timestamps();
             $table->softDeletes();
         });
@@ -25,6 +24,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('customers');
+        Schema::dropIfExists('stocks');
     }
 };

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 
-class Structure extends Model
+class Order extends Model
 {
     use HasFactory, Notifiable, SoftDeletes, HasUuids;
 
@@ -18,26 +18,15 @@ class Structure extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'phone',
-        'typeStructure'
+        'number',
+        'amount',
+        'status',
+        'paid',
+        'user_id',
     ];
 
-    public function user()
+    public function order_lines()
     {
-        return $this->hasMany(User::class);
-    }
-
-    public function products()
-    {
-        return $this->hasMany(Product::class, "provider_id", "id");
-    }
-
-    public function product()
-    {
-        return $this->hasMany(Product::class, "company_id", "id");
 
     }
-
 }
