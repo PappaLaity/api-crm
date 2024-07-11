@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
         Structure::factory()->create([
             "typeStructure" => StructureType::ADMIN->value,
         ]);
-        
+
         Structure::factory()->create([
             "typeStructure" => StructureType::Provider->value,
         ]);
