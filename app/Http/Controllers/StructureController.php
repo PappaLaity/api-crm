@@ -25,6 +25,12 @@ class StructureController extends Controller
      */
     public function store(Request $request)
     {
+        $validateData = $request->validate([
+            // Validation Rules
+        ]);
+
+        $structure = Structure::create($validateData);
+        return $this->successResponse(StructureResource::collection($structure), "Struture Successfully Created");
         //
     }
 
