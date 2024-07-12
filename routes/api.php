@@ -29,5 +29,5 @@ Route::prefix('v1')->group(function () {
     Route::apiResource('orders', OrderController::class);
     Route::apiResource('orders_lines', OrderLineController::class);
     Route::apiResource('stocks', StockController::class);
-    Route::apiResource('clients', CustomerController::class);
+    Route::apiResource('customers', CustomerController::class);
 });

@@ -2,17 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\CustomerResource;
 use App\Models\Customer;
+use App\Traits\ResponseTrait;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
+    use ResponseTrait;
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $customers = Customer::all();
+        return $this->successResponse(CustomerResource::collection($customers), "Customer's List");
     }
 
     /**
@@ -20,7 +25,13 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            "firstname" => "required|string",
+            "lastname" => "required|string",
+            "phone" => "required|string",
+        ]);
+        $customer = Customer::create($validatedData);
+        return $this->successResponse(new CustomerResource($customer), "Customer successfully created", 201);
     }
 
     /**
@@ -28,7 +39,7 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        //
+        return $this->successResponse(new CustomerResource($customer), "Customer Details");
     }
 
     /**
@@ -36,7 +47,13 @@ class CustomerController extends Controller
      */
     public function update(Request $request, Customer $customer)
     {
-        //
+        $validatedData = $request->validate([
+            "firstname" => "sometimes|string",
+            "lastname" => "sometimes|string",
+            "phone" => "sometimes|string",
+        ]);
+        $customer->update($validatedData);
+        return $this->successResponse(new CustomerResource($customer), "Customer updated successfully");
     }
 
     /**
@@ -44,6 +61,7 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        //
+        $customer->delete();
+        return $this->successResponse(null, "Customer deleted");
     }
 }
