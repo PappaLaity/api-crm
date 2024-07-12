@@ -21,7 +21,7 @@ class UserResource extends JsonResource
             "email" => $this->email,
             "phone" => $this->phone,
             "role" => $this->role,
-            "structure_id" => new StructureResource($this->structure),
+            "structure" => new StructureResource($this->structure),
         ];
     }
 }

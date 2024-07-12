@@ -17,8 +17,8 @@ class StockFactory extends Factory
     public function definition(): array
     {
         return [
-            'product_company_id' => 1,
-            "quantity" => 100
+            "quantity" => 100,
+            "price" => 1300
         ];
     }
 }

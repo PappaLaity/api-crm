@@ -14,11 +14,25 @@ class Stock extends Model
 
     protected $fillable = [
         'quantity',
-        'product_company_id',
+        'price',
+        'ref_company',
     ];
 
-    public function products()
+    public function product()
     {
-        return $this->hasOne(Product::class, "company_id", "product_company_id");
+        return $this->hasOne(Product::class, "ref_company", "ref_company");
+    }
+
+    public function incStock($qte)
+    {
+        $this->quantity += $qte;
+    }
+
+    public function decStock($qte)
+    {
+        if ($this->quantity >= $qte) {
+            $this->quantity -= $qte;
+        }
+
     }
 }

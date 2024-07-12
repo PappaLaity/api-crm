@@ -2,17 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ProductResource;
 use App\Models\Product;
+use App\Traits\ResponseTrait;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    use ResponseTrait;
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $products = Product::all();
+        return $this->successResponse(ProductResource::collection($products), "Product List");
     }
 
     /**
@@ -20,7 +25,22 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Data should Contain
+        // REF Provider -
+        // DESIGNATION -
+        // BARCODE -
+        // ProviderID
+
+        $validatedData = $request->validate([
+            "designation" => "required|string",
+            "barcode" => "required|string",
+            "ref_provider" => "required|string",
+            "provider_id" => "required|string",
+            "price" => "required",
+
+        ]);
+        $product = Product::create($validatedData);
+        return $this->successResponse(new ProductResource($product), "Product Successfully created", 201);
     }
 
     /**
@@ -28,7 +48,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        return $this->successResponse(new ProductResource($product), "Product's Details");
     }
 
     /**
@@ -36,7 +56,18 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        // Data should Contain
+        // REF Company -
+        // Company ID
+        $validatedData = $request->validate([
+            "designation" => "sometimes|string",
+            "ref_company" => "sometimes|string",
+            "company_id" => "sometimes|string",
+            "price" => "sometimes",
+
+        ]);
+        $product->update($validatedData);
+        return $this->successResponse(new ProductResource($product), "Product Successfully updated");
     }
 
     /**
@@ -44,6 +75,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        return $this->successResponse(null, "Product Deleted");
     }
 }

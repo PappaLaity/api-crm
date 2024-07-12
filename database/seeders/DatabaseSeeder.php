@@ -67,7 +67,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Stock::factory(2)->create([
-            "product_company_id" => Structure::where('typeStructure', StructureType::ADMIN->value)->get()->random()->id,
+            "ref_company" => Product::where('company_id', '<>', null)->get()->random()->value('ref_company')
         ]);
 
     }

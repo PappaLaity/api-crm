@@ -29,15 +29,15 @@ class Structure extends Model
         return $this->hasMany(User::class);
     }
 
-    public function products()
-    {
-        return $this->hasMany(Product::class, "provider_id", "id");
-    }
-
-    public function product()
-    {
-        return $this->hasMany(Product::class, "company_id", "id");
-
-    }
+//    public function products()
+//    {
+//        return $this->hasMany(Product::class, "provider_id", "id");
+//    }
+//
+//    public function product()
+//    {
+//        return $this->hasMany(Product::class, "company_id", "id");
+//
+//    }
 
 }

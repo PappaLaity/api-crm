@@ -12,8 +12,9 @@ return new class extends Migration {
     {
         Schema::create('stocks', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('product_company_id')->constrained('products', 'company_id')->onDelete('cascade');
+            $table->foreignUuid('ref_company')->constrained('products', 'ref_company')->onDelete('cascade');
             $table->integer("quantity")->default(0);
+            $table->decimal('price', 10, 2);;// Price
             $table->timestamps();
             $table->softDeletes();
         });

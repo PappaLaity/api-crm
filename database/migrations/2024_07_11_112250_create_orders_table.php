@@ -13,7 +13,7 @@ return new class extends Migration {
         Schema::create('orders', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('number')->unique();
-            $table->decimal('amount', 10, 2);
+            $table->decimal('amount', 10, 2)->default(0);
             $table->enum("status", ['created', "validated"])->default("created");
             $table->boolean('paid')->default(false);
             $table->foreignUuid('user_id')->constrained('users')->onDelete('cascade');
