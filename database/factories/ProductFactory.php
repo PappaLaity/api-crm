@@ -21,7 +21,7 @@ class ProductFactory extends Factory
             "designation" => fake()->text(50),
             "price" => 1000,
             "ref_provider" => "REF_PROVIDER_" . fake()->text(5),
-            "ref_company" => "REF_COMPANY_" . fake()->text(5),
+            "ref_company" => "REF_COMPANY_" . fake()->unique()->text(5),
             "provider_id" => 1,
             "company_id" => 2,
         ];

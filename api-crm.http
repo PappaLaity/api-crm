@@ -1,0 +1,183 @@
+### Structure List
+GET {{url}}/structures
+
+### Create Structure
+POST {{url}}/structures
+Accept: application/json
+Content-Type: application/json
+
+{
+  "nom": "Batimat",
+  "mail": "example@batimat.com",
+  "phone": "00330982345",
+  "typeStructure": "Batimat"
+}
+
+
+### Get Structures By ID
+GET {{url}}/structures/9c7f3c7c-8fd1-4dbe-b700-0c27194e87d7
+
+### UPDATE Structures By ID
+PUT {{url}}/structures/9c7f3c7c-8fd1-4dbe-b700-0c27194e87d7
+Accept: application/json
+Content-Type: application/json
+
+{
+  "nom": "LTD 2",
+  "mail": "kreiger231.ryleigh@king.com"
+}
+
+### Delete Structure
+DELETE {{url}}/structures/9c7fec81-f3b2-41bd-81f1-e3b6f21d080b
+
+## Users API
+
+### GET USERS
+GET {{url}}/users
+Authorization: {{token}}
+
+<> 2024-07-15T162154.200.json
+<> 2024-07-15T161936.404.json
+<> 2024-07-15T142205.200.json
+
+
+### Log In
+
+POST {{url}}/login
+Accept: application/json
+Content-Type: application/json
+
+{
+  "login": "admin@example.com",
+  "password": "password"
+}
+
+<> 2024-07-16T132554.200.json
+<> 2024-07-15T142224.200.json
+
+
+
+### Create User
+POST {{url}}/users
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "User Fournisseur",
+  "email": "exampleUser@provider.com",
+  "phone": "00221773456782",
+  "role": "provider",
+  "password": "password",
+  "structure_id": "9c7f3c7c-954e-40f4-aa57-591b64e16e01"
+}
+
+<> 2024-07-16T135356.401.json
+<> 2024-07-16T134950.500.json
+<> 2024-07-12T092415.201.json
+
+### Show User
+GET {{url}}/users/9c80f1bf-2b3e-4d46-a062-530bd9997694
+
+<> 2024-07-12T093628.200.json
+
+## Customers API
+
+### GET Customers List
+GET {{url}}/customers
+
+<> 2024-07-12T100116.200.json
+
+
+### Create Customer
+POST {{url}}/customers
+Accept: application/json
+Content-Type: application/json
+
+{
+  "firstname": "First Customer",
+  "lastname": "Last Customer",
+  "phone": "00221773456798"
+}
+
+<> 2024-07-12T100155.201.json
+
+
+### Show Customer
+GET {{url}}/customers/9c80ff36-e5a5-4fa5-83fd-870edbe5c620
+
+<> 2024-07-12T100310.200.json
+
+### Update Customer
+PUT {{url}}/customers/9c80ff36-e5a5-4fa5-83fd-870edbe5c620
+Accept: application/json
+Content-Type: application/json
+
+{
+  "firstname": "First Updated Customer"
+}
+
+<> 2024-07-12T100425.200.json
+
+## Products API
+
+### GET Products List
+GET {{url}}/products
+
+<> 2024-07-12T102858.200.json
+
+### Create Product
+POST {{url}}/products
+Accept: application/json
+Content-Type: application/json
+
+{
+  "designation": "Produit Fourniseeur 1",
+  "barcode": "1234567890987",
+  "price": 545,
+  "ref_provider": "REFPROV123454",
+  "provider_id": "9c7f3c7c-954e-40f4-aa57-591b64e16e01"
+}
+
+<> 2024-07-12T131344.201.json
+
+### Show Product
+GET {{url}}/products/9c8143d0-3edb-4d4c-a5d5-139d728fb69f
+
+<> 2024-07-12T131542.200.json
+<> 2024-07-12T131443.200.json
+
+
+### Update Product
+PUT {{url}}/products/9c8143d0-3edb-4d4c-a5d5-139d728fb69f
+Accept: application/json
+Content-Type: application/json
+
+{
+  "ref_company": "REFBAT12344",
+  "company_id": "9c7f3c7c-8fd1-4dbe-b700-0c27194e87d7"
+}
+
+<> 2024-07-12T131500.200.json
+
+## Stocks API
+
+### GET Stock List
+GET {{url}}/stocks
+
+<> 2024-07-12T181846.200.json
+
+
+## Orders API
+
+### GET Orders List
+GET {{url}}/orders
+
+<> 2024-07-12T184546.200.json
+
+## Order Line API
+
+### GET Orders Line List
+GET {{url}}/orders_lines
+
+<> 2024-07-12T192143.200.json
+

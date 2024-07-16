@@ -55,6 +55,7 @@ class DatabaseSeeder extends Seeder
         Product::factory(2)->create([
             "provider_id" => Structure::where('typeStructure', StructureType::Provider->value)->get()->random()->id,
             "company_id" => null,
+            "ref_company" => null
         ]);
 
         Order::factory(2)->create([

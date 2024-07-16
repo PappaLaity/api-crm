@@ -5,11 +5,14 @@ namespace App\Http\Controllers;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Traits\ResponseTrait;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
     use ResponseTrait;
+
+    // HasApiTokens;
 
     /**
      * Display a listing of the resource.
@@ -33,8 +36,12 @@ class UserController extends Controller
             'role' => 'required|in:provider,manager,admin',
             'structure_id' => 'required|string',
         ]);
-        $user = User::create($validatedData);
-        return $this->successResponse(new UserResource($user), "User Successfully created", 201);
+        try {
+            $user = User::create($validatedData);
+            return $this->successResponse(new UserResource($user), "User Successfully created", 201);
+        } catch (QueryException $e) {
+            return $this->errorResponse($e->errorInfo[2], 409);
+        }
     }
 
     /**

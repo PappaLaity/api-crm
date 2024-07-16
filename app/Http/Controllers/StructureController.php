@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\StructureType;
 use App\Http\Resources\StructureResource;
 use App\Models\Structure;
 use App\Traits\ResponseTrait;
@@ -17,6 +18,12 @@ class StructureController extends Controller
     public function index()
     {
         $structures = Structure::all();
+        return $this->successResponse(StructureResource::collection($structures), "Struture List Successfully recept");
+    }
+
+    public function getProviders()
+    {
+        $structures = Structure::where('typeStructure', StructureType::Provider->value)->get();
         return $this->successResponse(StructureResource::collection($structures), "Struture List Successfully recept");
     }
 

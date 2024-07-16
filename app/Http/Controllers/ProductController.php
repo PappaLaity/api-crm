@@ -20,6 +20,21 @@ class ProductController extends Controller
         return $this->successResponse(ProductResource::collection($products), "Product List");
     }
 
+
+    public function getProductForCompany($id)
+    {
+        $products = Product::where('company_id', $id)->get();
+        return $this->successResponse(ProductResource::collection($products), "Product List");
+
+    }
+
+    public function getProductForProvider($id)
+    {
+        $products = Product::where('provider_id', $id)->get();
+        return $this->successResponse(ProductResource::collection($products), "Product List");
+
+    }
+
     /**
      * Store a newly created resource in storage.
      */
